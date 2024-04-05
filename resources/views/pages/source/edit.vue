@@ -66,7 +66,7 @@ onMounted(() => {
 
     <LayoutDashboard>
         <div class="w-full bg-white shadow">
-            <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 lg:px-8">
+            <div class="mx-auto flex w-full max-w-7xl flex-row-reverse items-center justify-between gap-6 px-6 lg:px-8">
                 <div class="flex w-full items-center">
                     <div class="flex w-full items-center gap-3 py-4">
                         <Link :href="route('ltu.source_translation')" class="flex items-center gap-2 rounded-md border border-transparent bg-gray-50 px-2 py-1 hover:border-blue-400 hover:bg-blue-100">
@@ -83,16 +83,16 @@ onMounted(() => {
                             <IconArrowRight class="size-6 text-gray-400" />
                         </div>
 
-                        <div class="flex items-center gap-2 rounded-md border border-blue-100 bg-blue-50 px-2 py-1 text-blue-500">
-                            <IconKey class="size-4" />
+                        <div class="flex items-center gap-2 overflow-x-hidden rounded-md border border-blue-100 bg-blue-50 px-2 py-1 text-blue-500">
+                            <IconKey class="size-4 hidden md:block" />
 
-                            <span class="text-sm" v-text="phrase.key"></span>
+                            <span class="text-sm truncate" v-text="phrase.key"></span>
                         </div>
                     </div>
                 </div>
 
                 <Link v-tooltip="'Go back'" :href="route('ltu.source_translation')" class="flex size-10 items-center justify-center rounded-full bg-gray-100 p-1 hover:bg-gray-200">
-                    <IconArrowRight class="size-6 text-gray-400" />
+                    <IconArrowLeft class="size-6 text-gray-400" />
                 </Link>
             </div>
         </div>
