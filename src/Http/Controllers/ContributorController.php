@@ -38,7 +38,7 @@ class ContributorController extends BaseController
     {
         $request->validate([
             'role' => 'required|integer',
-            'email' => 'required|email|unique:ltu_contributors,email',
+            'email' => 'required|email|unique:ltu_contributors,email|unique:ltu_invites,email',
         ]);
 
         do {

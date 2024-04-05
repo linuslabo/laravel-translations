@@ -1,0 +1,1 @@
+import{_ as o}from"./phrase-item.vue_vue_type_script_setup_true_lang-a04d1def.js";import"./icon-pencil-19135d59.js";import"./_plugin-vue_export-helper-c27b6911.js";import"./app-cf1999b8.js";import"./icon-language-8f99b34e.js";export{o as default};

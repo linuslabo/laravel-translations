@@ -151,5 +151,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <div v-html="emojiAlt"></div>
+    <div v-html="countryFlag"></div>
 </template>

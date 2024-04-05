@@ -27,7 +27,7 @@ const useTranslation = (value: string) => {
         />
 
         <div class="flex h-20 w-full items-center justify-center px-4 py-6">
-            <span class="text-sm text-gray-500">More integrations coming in next releases...</span>
+<!--            <span class="text-sm text-gray-500">More integrations coming in next releases...</span>-->
         </div>
     </div>
 

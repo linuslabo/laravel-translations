@@ -1,16 +1,12 @@
 @component('mail::message')
-    # Hello
+{{__('Someone has invited you to join their translation team on')}} {{ config('app.name') }}.
 
-    Someone has invited you to join their  translation team on {{ config('app.name') }}.
+@component('mail::button', ['url' => $link])
+{{__('Accept Invitation')}}
+@endcomponent
 
-    @component('mail::button', ['url' => $link])
-        Accept Invitation
-    @endcomponent
+{{__('This invitation link will expire in 24 hours.')}}
 
-    This invitation link will expire in 24 hours.
-
-    If you did not request a password reset, no further action is required.
-
-    Thanks,<br>
-    {{ config('app.name') }}
+{{__('Thanks')}},<br>
+{{ config('app.name') }}
 @endcomponent

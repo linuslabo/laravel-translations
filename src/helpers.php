@@ -61,14 +61,14 @@ if (! function_exists('buildPhrasesTree')) {
         /** @var \Outhebox\TranslationsUI\Models\Phrase $phrase */
         foreach ($phrases as $phrase) {
             if ($phrase->file->file_name === "$locale.json") {
-                $tree[$locale][$phrase->file->file_name][$phrase->key] = ! blank($phrase->value) ? $phrase->value : $phrase->source->value;
+                $tree[$locale][$phrase->file->file_name][$phrase->key] = ! blank($phrase->value) ? $phrase->value : $phrase->source?->value ?? '';
 
                 continue;
             }
             setArrayValue(
                 array: $tree[$locale][$phrase->file->file_name],
                 key: $phrase->key,
-                value: ! blank($phrase->value) ? $phrase->value : $phrase->source->value
+                value: ! blank($phrase->value) ? $phrase->value : $phrase->source?->value ?? ''
             );
         }
 

@@ -10,6 +10,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Momentum\Modal\Modal;
 use Outhebox\TranslationsUI\Actions\CreateTranslationForLanguageAction;
+use Outhebox\TranslationsUI\Events\TranslationsPublishedEvent;
 use Outhebox\TranslationsUI\Http\Resources\LanguageResource;
 use Outhebox\TranslationsUI\Http\Resources\TranslationResource;
 use Outhebox\TranslationsUI\Models\Language;
@@ -30,6 +31,12 @@ class TranslationController extends BaseController
     {
         try {
             app(TranslationsManager::class)->export();
+
+            try {
+                TranslationsPublishedEvent::dispatch();
+            } catch (Exception $e) {
+                report($e);
+            }
 
             return redirect()->route('ltu.translation.index')->with('notification', [
                 'type' => 'success',

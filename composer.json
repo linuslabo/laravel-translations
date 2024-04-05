@@ -1,5 +1,5 @@
 {
-    "name": "outhebox/laravel-translations",
+    "name": "linuslabo/laravel-translations",
     "description": "Laravel Translations UI provides a simple way to manage your translations in your Laravel application. It allows you to add, edit, delete and export translations, and it also provides a search functionality to find translations.",
     "keywords": [
         "laravel",
@@ -21,14 +21,14 @@
     ],
     "require": {
         "php": "^8.2|^8.3",
+        "ext-zip": "*",
         "based/momentum-modal": "^0.3.0",
         "brick/varexporter": "^0.4.0",
         "illuminate/contracts": "^10.0|^11.0",
         "inertiajs/inertia-laravel": "^1.0",
         "spatie/laravel-package-tools": "^1.0",
         "stichoza/google-translate-php": "^5.1",
-        "tightenco/ziggy": "^2.0",
-        "ext-zip": "*"
+        "tightenco/ziggy": "^2.1"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
