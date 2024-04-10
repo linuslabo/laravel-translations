@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 use Momentum\Modal\Modal;
@@ -22,9 +23,42 @@ class TranslationController extends BaseController
     public function publish(): Modal
     {
         return Inertia::modal('translations/modals/publish-translations', [
-            'canPublish' => (bool) Translation::count() > 0,
-            'isProductionEnv' => (bool) app()->environment('production'),
+            'canPublish' => (bool)Translation::count() > 0,
+            'isProductionEnv' => (bool)app()->environment('production'),
         ])->baseRoute('ltu.translation.index');
+    }
+
+    public function requestGenerate(Translation $translation): Modal
+    {
+        return Inertia::modal('translations/modals/generate-translations', [
+            'languageName' => $translation->language->name,
+            'translationId' => $translation->id,
+            'missingValues' => $translation->phrases()->whereNull('value')->count(),
+            'totalValues' => $translation->phrases()->count(),
+            'isProductionEnv' => (bool)app()->environment('production'),
+        ])->baseRoute('ltu.phrases.index', ['translation' => $translation->id]);
+    }
+
+    public function generate(Request $request, Translation $translation)
+    {
+        Log::info('Generating translations for ' . $translation->language->name . '...', [
+            'translationId' => $translation->id,
+            'onlyMissing' => $request->input('only_missing', true),
+        ]);
+
+        try {
+            ChatGPTController::translateLanguage($translation->id, $request->input('only_missing', true));
+            return redirect()->route('ltu.phrases.index', ['translation' => $translation->id])->with('notification', [
+                'type' => 'success',
+                'body' => 'Translations have been generated successfully',
+            ]);
+
+        } catch (Exception $e) {
+            return redirect()->route('ltu.phrases.index', ['translation' => $translation->id])->with('notification', [
+                'type' => 'error',
+                'body' => $e->getMessage(),
+            ]);
+        }
     }
 
     public function export(): RedirectResponse
@@ -33,7 +67,7 @@ class TranslationController extends BaseController
             app(TranslationsManager::class)->export();
 
             try {
-                TranslationsPublishedEvent::dispatch();
+                TranslationsPublishedEvent::dispatch(Translation::has('phrases')->get()->pluck('language.code')->toArray());
             } catch (Exception $e) {
                 report($e);
             }
@@ -54,7 +88,7 @@ class TranslationController extends BaseController
     {
         $downloadPath = app(TranslationsManager::class)->download();
 
-        if (! $downloadPath) {
+        if (!$downloadPath) {
             return redirect()->route('ltu.translation.index')->with('notification', [
                 'type' => 'error',
                 'body' => 'Translations could not be downloaded',

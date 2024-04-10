@@ -145,9 +145,9 @@ const countryFlag = computed(() => {
 
 const emojiAlt = ref("")
 
-onMounted(() => {
-    emojiAlt.value = twemoji.parse(countryFlag.value, { folder: "svg", ext: ".svg", className: props.width })
-})
+// onMounted(() => {
+//     emojiAlt.value = twemoji.parse(countryFlag.value, { folder: "svg", ext: ".svg", className: props.width })
+// })
 </script>
 
 <template>

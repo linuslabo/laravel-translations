@@ -75,4 +75,11 @@ return [
     'exclude_files' => [
         //'validation.php', // Exclude default validation for example.
     ],
+
+    /*
+     * OpenAI API Key
+     */
+    'openai' => [
+        'api_key' => env('OPENAI_API_KEY'),
+    ],
 ];

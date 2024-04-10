@@ -8,6 +8,7 @@ use Outhebox\TranslationsUI\Console\Commands\ContributorCommand;
 use Outhebox\TranslationsUI\Console\Commands\ExportTranslationsCommand;
 use Outhebox\TranslationsUI\Console\Commands\ImportTranslationsCommand;
 use Outhebox\TranslationsUI\Console\Commands\PublishCommand;
+use Outhebox\TranslationsUI\Console\Commands\TranslateMissingWithAI;
 use Outhebox\TranslationsUI\Exceptions\TranslationsUIExceptionHandler;
 use Outhebox\TranslationsUI\Models\Contributor;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
@@ -39,6 +40,7 @@ class TranslationsUIServiceProvider extends PackageServiceProvider
                 CleanOldVersionCommand::class,
                 ImportTranslationsCommand::class,
                 ExportTranslationsCommand::class,
+                TranslateMissingWithAI::class
             ])->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->startWith(function (InstallCommand $command) {

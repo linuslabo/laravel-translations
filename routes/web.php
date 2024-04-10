@@ -47,6 +47,9 @@ Route::middleware(['web', HandleInertiaRequests::class])->prefix('translations')
         Route::get('add-translation', [TranslationController::class, 'create'])->name('translation.create');
         Route::post('add-translation', [TranslationController::class, 'store'])->name('translation.store');
 
+        Route::get('generate-translations/{translation}', [TranslationController::class, 'requestGenerate'])->name('translation.generate.request');
+        Route::post('generate-translations/{translation}', [TranslationController::class, 'generate'])->name('translation.generate');
+
         // Source Phrase Routes
         Route::prefix('source-translation')->group(function () {
             Route::get('/', [SourcePhraseController::class, 'index'])->name('source_translation');

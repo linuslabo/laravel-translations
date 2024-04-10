@@ -84,7 +84,7 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <Link v-tooltip="'Go back'" :href="route('ltu.phrases.index', translation.id)" class="flex size-10 items-center justify-center rounded-full bg-gray-100 p-1 hover:bg-gray-200">
+                <Link v-tooltip="'Go back'" :href="route('ltu.phrases.index', translation.id)" class="flex size-8 items-center justify-center rounded-full bg-gray-100 p-1 hover:bg-gray-200">
                     <IconArrowLeft class="size-6 text-gray-400" />
                 </Link>
             </div>
@@ -153,7 +153,7 @@ onMounted(() => {
                 </div>
 
                 <div class="flex h-16 w-full items-center justify-center lg:h-auto lg:w-32">
-                    <IconArrowRight class="size-10 rotate-90 text-blue-200 lg:rotate-0" />
+                    <IconArrowRight class="size-8 rotate-90 text-blue-200 lg:rotate-0" />
                 </div>
 
                 <div class="w-full overflow-hidden rounded-md bg-white shadow ring-2 ring-blue-100 focus-within:ring-blue-400">
@@ -207,11 +207,6 @@ onMounted(() => {
                     <MachineTranslate :suggested-translations="suggestedTranslations" :language="translation.language.code" @use-translation="useTranslation" />
                 </tab>
 
-                <tab
-                    prefix='<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 3.33334C8.81665 3.33334 5.83331 6.31668 5.83331 10C5.83331 13.6833 8.81665 16.6667 12.5 16.6667C16.1833 16.6667 19.1666 13.6833 19.1666 10C19.1666 6.31668 16.1833 3.33334 12.5 3.33334ZM12.5 15C9.74165 15 7.49998 12.7583 7.49998 10C7.49998 7.24168 9.74165 5.00001 12.5 5.00001C15.2583 5.00001 17.5 7.24168 17.5 10C17.5 12.7583 15.2583 15 12.5 15ZM5.83331 5.29168C3.89165 5.97501 2.49998 7.82501 2.49998 10C2.49998 12.175 3.89165 14.025 5.83331 14.7083V16.45C2.95831 15.7083 0.833313 13.1083 0.833313 10C0.833313 6.89168 2.95831 4.29168 5.83331 3.55001V5.29168Z"></path></svg>'
-                    name="Similar">
-                    <SimilarPhrases :similar-phrases="similarPhrases" />
-                </tab>
             </tabs>
         </div>
     </LayoutDashboard>

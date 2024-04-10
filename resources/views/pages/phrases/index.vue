@@ -47,6 +47,11 @@ watch([searchField, phraseStatus], debounce(() => {
     <LayoutDashboard>
         <div class="w-full bg-white shadow">
             <div class="mx-auto flex w-full max-w-7xl flex-row-reverse items-center justify-between gap-6 px-6 lg:px-8">
+                <Link :href="route('ltu.translation.generate.request', translation.id)" class="btn btn-xs btn-success shrink-0">
+<!--                    <IconPublish class="size-4" />-->
+                    <span><span class="hidden md:inline">Generate with </span>ChatGPT</span>
+                </Link>
+
                 <div class="flex w-full items-center">
                     <div class="flex w-full items-center gap-3 py-4">
                         <Link :href="route('ltu.phrases.index', translation.id)" class="flex items-center gap-2 rounded-md border border-transparent bg-gray-50 px-2 py-1 hover:border-blue-400 hover:bg-blue-100">
@@ -63,7 +68,7 @@ watch([searchField, phraseStatus], debounce(() => {
                     </div>
                 </div>
 
-                <Link v-tooltip="'Go back'" :href="route('ltu.translation.index')" class="flex size-10 items-center justify-center rounded-full bg-gray-100 p-1 hover:bg-gray-200">
+                <Link v-tooltip="'Go back'" :href="route('ltu.translation.index')" class="flex size-8 items-center justify-center rounded-full bg-gray-100 p-1 hover:bg-gray-200">
                     <IconArrowLeft class="size-6 text-gray-400" />
                 </Link>
             </div>

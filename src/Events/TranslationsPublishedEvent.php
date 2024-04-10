@@ -8,7 +8,10 @@ class TranslationsPublishedEvent
 {
     use Dispatchable;
 
-    public function __construct()
+    public array $translationLanguageCodes;
+
+    public function __construct(array $translationLanguageCodes)
     {
+        $this->translationLanguageCodes = $translationLanguageCodes;
     }
 }

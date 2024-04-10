@@ -17,6 +17,7 @@ declare module 'vue' {
     Head: typeof import('@inertiajs/vue3')['Head']
     IconArrowLeft: typeof import('./../../views/components/icons/icon-arrow-left.vue')['default']
     IconArrowRight: typeof import('./../../views/components/icons/icon-arrow-right.vue')['default']
+    IconChatgpt: typeof import('./../../views/components/icons/icon-chatgpt.vue')['default']
     IconCheck: typeof import('./../../views/components/icons/icon-check.vue')['default']
     IconClipboard: typeof import('./../../views/components/icons/icon-clipboard.vue')['default']
     IconClose: typeof import('./../../views/components/icons/icon-close.vue')['default']

@@ -91,7 +91,7 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <Link v-tooltip="'Go back'" :href="route('ltu.source_translation')" class="flex size-10 items-center justify-center rounded-full bg-gray-100 p-1 hover:bg-gray-200">
+                <Link v-tooltip="'Go back'" :href="route('ltu.source_translation')" class="flex size-8 items-center justify-center rounded-full bg-gray-100 p-1 hover:bg-gray-200">
                     <IconArrowLeft class="size-6 text-gray-400" />
                 </Link>
             </div>
