@@ -52,7 +52,7 @@ class TranslationController extends BaseController
             TranslationsRequestedEvent::dispatch($translation->id,
                 $translation->language->code,
                 $request->input('only_missing', true),
-                $request->input('regenerate_entities', false));
+                $request->input('regenerate_entities', false))->onQueue('translations');
 
             return redirect()->route('ltu.phrases.index', ['translation' => $translation->id])->with('notification', [
                 'type' => 'success',
