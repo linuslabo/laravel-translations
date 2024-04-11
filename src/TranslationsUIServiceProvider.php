@@ -9,9 +9,7 @@ use Outhebox\TranslationsUI\Console\Commands\ExportTranslationsCommand;
 use Outhebox\TranslationsUI\Console\Commands\ImportTranslationsCommand;
 use Outhebox\TranslationsUI\Console\Commands\PublishCommand;
 use Outhebox\TranslationsUI\Console\Commands\TranslateMissingWithAI;
-use Outhebox\TranslationsUI\Events\TranslationsRequestedEvent;
 use Outhebox\TranslationsUI\Exceptions\TranslationsUIExceptionHandler;
-use Outhebox\TranslationsUI\Listeners\TranslationsRequestedEventListener;
 use Outhebox\TranslationsUI\Models\Contributor;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -68,12 +66,6 @@ class TranslationsUIServiceProvider extends PackageServiceProvider
                     });
             });
     }
-
-    protected $listen = [
-        TranslationsRequestedEvent::class => [
-            TranslationsRequestedEventListener::class,
-        ],
-    ];
 
     public function packageBooted(): void
     {

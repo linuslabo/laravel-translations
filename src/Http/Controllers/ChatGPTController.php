@@ -48,14 +48,14 @@ class ChatGPTController extends BaseController
             $chunkSize = 50;
             $chunkNumber = ceil($phrasesNumber / $chunkSize);
             foreach ($phrasesToTranslateByGroup[$group]->chunk($chunkSize) as $chunk) {
-                $messageForChatGPT = 'Given the following key-value json array, translate its values from English to ' . $translation->language->name . ', preserving the keys, preserving the case (also kekab-case when it applies) of the words and leaving the words wrapped directly in curly brackets as they are: ' . json_encode($chunk);
+                $messageForChatGPT = 'Given the following nested key-value json array, translate its values from English to ' . $translation->language->name . 'Do not translate the array keys and the html tags. Preserve the case of the words (also kekab-case when it applies): ' . json_encode($chunk);
 
                 try {
                     $translatedPhrases = self::askChatGPT($messageForChatGPT);
 
                     Log::debug('translatedPhrases: ', [
                         'group' => $group,
-                        'chunk' => $count++ . '/' . $chunkNumber,
+                        'chunk' => $count++ . '/' . $chunkNumber
                     ]);
 
                     if (!empty($translatedPhrases)) {
