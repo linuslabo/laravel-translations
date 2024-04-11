@@ -49,7 +49,7 @@ watch([searchField, phraseStatus], debounce(() => {
             <div class="mx-auto flex w-full max-w-7xl flex-row-reverse items-center justify-between gap-6 px-6 lg:px-8">
                 <Link :href="route('ltu.translation.generate.request', translation.id)" class="btn btn-xs btn-success shrink-0">
 <!--                    <IconPublish class="size-4" />-->
-                    <span><span class="hidden md:inline">Generate with </span>ChatGPT</span>
+                    <span><span class="hidden md:inline">Translate with </span>ChatGPT</span>
                 </Link>
 
                 <div class="flex w-full items-center">

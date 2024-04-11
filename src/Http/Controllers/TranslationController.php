@@ -12,6 +12,7 @@ use Inertia\Response;
 use Momentum\Modal\Modal;
 use Outhebox\TranslationsUI\Actions\CreateTranslationForLanguageAction;
 use Outhebox\TranslationsUI\Events\TranslationsPublishedEvent;
+use Outhebox\TranslationsUI\Events\TranslationsRequestedEvent;
 use Outhebox\TranslationsUI\Http\Resources\LanguageResource;
 use Outhebox\TranslationsUI\Http\Resources\TranslationResource;
 use Outhebox\TranslationsUI\Models\Language;
@@ -44,13 +45,18 @@ class TranslationController extends BaseController
         Log::info('Generating translations for ' . $translation->language->name . '...', [
             'translationId' => $translation->id,
             'onlyMissing' => $request->input('only_missing', true),
+            'regenerateEntitiesTranslations' => $request->input('regenerate_entities', false),
         ]);
 
         try {
-            ChatGPTController::translateLanguage($translation->id, $request->input('only_missing', true));
+            event(new TranslationsRequestedEvent($translation->id,
+                $translation->language->code,
+                $request->input('only_missing', true),
+                $request->input('regenerate_entities', false)));
+
             return redirect()->route('ltu.phrases.index', ['translation' => $translation->id])->with('notification', [
                 'type' => 'success',
-                'body' => 'Translations have been generated successfully',
+                'body' => 'Translations will be generated in the background. Please check back in a few minutes.',
             ]);
 
         } catch (Exception $e) {

@@ -14,6 +14,7 @@ const { close } = useModal()
 
 const loading = ref(false)
 const onlyMissing = ref(true)
+const regenerateEntities = ref(false)
 
 const submit = () => {
     loading.value = true
@@ -21,7 +22,8 @@ const submit = () => {
     router.post(route("ltu.translation.generate", {
         translation: props.translationId
     }), {
-        only_missing: onlyMissing.value
+        only_missing: onlyMissing.value,
+        regenerate_entities: regenerateEntities.value
     }, {
         preserveScroll: true,
         onSuccess: () => {
@@ -44,18 +46,30 @@ const submit = () => {
 
                 <div class="flex-1">
                     <h3 class="text-balance text-xl font-semibold leading-6 text-gray-600">
-                        Generate translations for {{ languageName }}
+                        Translate {{ languageName }}
                     </h3>
 
                     <p class="mt-1 text-sm text-gray-500">
-                        <span
-                            v-if="!(onlyMissing && !missingValues)">The process will generate translations for {{ onlyMissing ? missingValues : totalValues
+                        <span>The process will generate translations for {{ onlyMissing ? missingValues : totalValues
                             }} phrases.
                         It may take a few minutes to complete. Please be patient.</span>
                     </p>
                 </div>
             </div>
 
+<!--            <div class="relative flex items-start">-->
+<!--                <div class="flex h-6 items-center">-->
+<!--                    <input-->
+<!--                        id="with-entities" v-model="regenerateEntities" aria-describedby="with-entities-description" name="with-entities"-->
+<!--                        type="checkbox" class="size-4 rounded border-gray-300 text-blue-600 focus:ring-blue-600">-->
+<!--                </div>-->
+
+<!--                <div class="ml-3 text-sm leading-6">-->
+<!--                    <label for="with-entities" class="font-medium text-gray-900">Also regenerate entity translations</label>-->
+
+<!--                    <p id="with-entities-description" class="text-gray-500">Request the translation of all the missing fields for entities of your platform.</p>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="relative flex items-start">
                 <div class="flex h-6 items-center">
                     <input
@@ -71,10 +85,10 @@ const submit = () => {
                 </div>
             </div>
 
+
             <div v-if="!onlyMissing" class="w-full text-center">
                 <Alert v-if="!isProductionEnv" variant="warning" class="text-left">
-                    <strong>Warning:</strong> Deselecting 'Only generate missing translations' will regenerate all
-                    existing translations for this language: existing translations will be overwritten.
+                    <strong>Warning:</strong> Existing translations will be overwritten.
                 </Alert>
             </div>
             <div v-else class="w-full text-center">
@@ -89,7 +103,7 @@ const submit = () => {
             <BaseButton variant="secondary" type="button" size="lg" tabindex="1" @click="close"> Close</BaseButton>
 
             <BaseButton
-                variant="primary" type="button" size="lg" :disabled="loading || (onlyMissing && !missingValues)"
+                variant="primary" type="button" size="lg" :disabled="loading || (onlyMissing && !missingValues && !regenerateEntities)"
                 :is-loading="loading" @click="submit">
                 Generate
             </BaseButton>
