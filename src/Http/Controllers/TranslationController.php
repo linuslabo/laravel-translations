@@ -73,7 +73,7 @@ class TranslationController extends BaseController
             app(TranslationsManager::class)->export();
 
             try {
-                TranslationsPublishedEvent::dispatch(Translation::has('phrases')->get()->pluck('language.code')->toArray());
+                TranslationsPublishedEvent::dispatch(Translation::has('phrases')->get()->pluck('language.code')->toArray())->onQueue('translations');
             } catch (Exception $e) {
                 report($e);
             }
